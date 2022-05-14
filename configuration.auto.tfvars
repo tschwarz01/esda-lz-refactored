@@ -7,3 +7,4 @@ global_settings = {
     region2 = "centralus"
   }
 }
+
