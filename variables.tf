@@ -107,6 +107,10 @@ variable "data_factory" {
   default = {}
 }
 
+variable "databricks_workspaces" {
+  default = {}
+}
+
 variable "data_factory_integration_runtime_self_hosted" {
   default = {}
 }

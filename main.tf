@@ -19,6 +19,9 @@ provider "azurerm" {
     key_vault {
       purge_soft_delete_on_destroy = true
     }
+    resource_group {
+      prevent_deletion_if_contains_resources = false
+    }
   }
 }
 
@@ -56,6 +59,10 @@ module "esa-dlz" {
   data_factory = {
     #data_factory                                 = var.data_factory
     #data_factory_integration_runtime_self_hosted = var.data_factory_integration_runtime_self_hosted
+  }
+
+  database = {
+    databricks_workspaces = var.databricks_workspaces
   }
 
   purview = {
