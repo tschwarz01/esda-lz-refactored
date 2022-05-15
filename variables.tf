@@ -93,6 +93,10 @@ variable "diagnostic_storage_accounts" {
   default     = {}
 }
 
+variable "storage_accounts" {
+  default = {}
+}
+
 variable "log_analytics" {
   description = "Configuration object - Log Analytics resources."
   default     = {}
@@ -111,6 +115,10 @@ variable "databricks_workspaces" {
   default = {}
 }
 
+variable "synapse_workspaces" {
+  default = {}
+}
+
 variable "data_factory_integration_runtime_self_hosted" {
   default = {}
 }
@@ -120,6 +128,10 @@ variable "keyvault_access_policies" {
 }
 
 variable "keyvaults" {
+  default = {}
+}
+
+variable "role_mapping" {
   default = {}
 }
 
@@ -172,5 +184,9 @@ variable "shared_image_galleries" {
 }
 
 variable "synapse_privatelink_hubs" {
+  default = {}
+}
+
+variable "happy_times" {
   default = {}
 }

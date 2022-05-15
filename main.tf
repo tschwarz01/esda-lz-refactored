@@ -30,23 +30,24 @@ data "azurerm_client_config" "default" {}
 
 
 module "esa-dlz" {
-  source               = "./resources"
-  global_settings      = var.global_settings
-  common_module_params = local.common_module_params
-  resource_groups      = var.resource_groups
-  #keyvaults                = var.keyvaults
-  #keyvault_access_policies = var.keyvault_access_policies
-  #managed_identities       = var.managed_identities
+  source                   = "./resources"
+  global_settings          = var.global_settings
+  common_module_params     = local.common_module_params
+  resource_groups          = var.resource_groups
+  keyvaults                = var.keyvaults
+  keyvault_access_policies = var.keyvault_access_policies
+  managed_identities       = var.managed_identities
+  storage_accounts         = var.storage_accounts
 
   networking = {
     vnets                             = var.vnets
     vnet_peerings_v1                  = var.vnet_peerings_v1
     network_security_group_definition = var.network_security_group_definition
+    private_dns_vnet_links            = local.private_dns_zones
     #application_security_groups       = var.application_security_groups
     #public_ip_addresses               = var.public_ip_addresses
     #load_balancers                    = var.load_balancers
     #synapse_privatelink_hubs          = var.synapse_privatelink_hubs
-    private_dns_vnet_links = local.private_dns_zones
   }
 
   compute = {
@@ -63,6 +64,7 @@ module "esa-dlz" {
 
   database = {
     databricks_workspaces = var.databricks_workspaces
+    #synapse_workspaces    = var.synapse_workspaces
   }
 
   purview = {
