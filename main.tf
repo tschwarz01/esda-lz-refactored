@@ -38,6 +38,7 @@ module "esa-dlz" {
   keyvault_access_policies = var.keyvault_access_policies
   managed_identities       = var.managed_identities
   storage_accounts         = var.storage_accounts
+  role_mapping             = var.role_mapping
 
   networking = {
     vnets                             = var.vnets
@@ -64,7 +65,7 @@ module "esa-dlz" {
 
   database = {
     databricks_workspaces = var.databricks_workspaces
-    #synapse_workspaces    = var.synapse_workspaces
+    synapse_workspaces    = var.synapse_workspaces
   }
 
   purview = {
