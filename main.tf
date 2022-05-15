@@ -36,8 +36,8 @@ module "esa-dlz" {
   #managed_identities       = var.managed_identities
 
   networking = {
-    vnets = var.vnets
-    #vnet_peerings_v1                  = var.vnet_peerings_v1
+    vnets            = var.vnets
+    vnet_peerings_v1 = var.vnet_peerings_v1
     #network_security_group_definition = var.network_security_group_definition
     #application_security_groups       = var.application_security_groups
     #public_ip_addresses               = var.public_ip_addresses
