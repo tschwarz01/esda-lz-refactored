@@ -75,17 +75,35 @@ vnets = {
       address_space = ["10.50.8.0/21"]
     }
     subnets = {
-      shared_databricks_container = {
-        name          = "databricks-container-shared"
+      shared_databricks_pub = {
+        name          = "databricks-pub-shared"
         cidr          = ["10.50.8.0/25"]
-        should_create = false
-        nsg_key       = "databricks_container"
+        should_create = true
+        nsg_key       = "databricks_pub"
+        delegation = {
+          name               = "databricks-pub-delegation"
+          service_delegation = "Microsoft.Databricks/workspaces"
+          actions = [
+            "Microsoft.Network/virtualNetworks/subnets/join/action",
+            "Microsoft.Network/virtualNetworks/subnets/prepareNetworkPolicies/action",
+            "Microsoft.Network/virtualNetworks/subnets/unprepareNetworkPolicies/action",
+          ]
+        }
       }
-      shared_databricks_host = {
-        name          = "databricks-host-shared"
+      shared_databricks_pri = {
+        name          = "databricks-pri-shared"
         cidr          = ["10.50.8.128/25"]
-        should_create = false
-        nsg_key       = "databricks_host"
+        should_create = true
+        nsg_key       = "databricks_pri"
+        delegation = {
+          name               = "databricks-pri-delegation"
+          service_delegation = "Microsoft.Databricks/workspaces"
+          actions = [
+            "Microsoft.Network/virtualNetworks/subnets/join/action",
+            "Microsoft.Network/virtualNetworks/subnets/prepareNetworkPolicies/action",
+            "Microsoft.Network/virtualNetworks/subnets/unprepareNetworkPolicies/action",
+          ]
+        }
       }
       services = {
         name          = "general-services"
@@ -190,4 +208,27 @@ vnet_peerings_v1 = {
     allow_gateway_transit        = false
     use_remote_gateways          = false
   }
+}
+
+network_security_group_definition = {
+  empty_nsg = {
+    resource_group_key = "vnet_region1"
+    name               = "empty_nsg"
+
+    nsg = []
+  }
+
+  databricks_pub = {
+    resource_group_key = "network"
+    name               = "databricks-pub-nsg"
+
+    nsg = []
+  }
+  databricks_pri = {
+    resource_group_key = "network"
+    name               = "databricks-pri-nsg"
+
+    nsg = []
+  }
+
 }
