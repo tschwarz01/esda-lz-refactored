@@ -79,6 +79,46 @@ keyvaults = {
       }
     }
   }
+  hive_sql_secrets = {
+    name                     = "sqlsecrets32"
+    resource_group_key       = "hive_metadata"
+    sku_name                 = "standard"
+    soft_delete_enabled      = true
+    purge_protection_enabled = false
+
+    creation_policies = {
+      logged_in_user = {
+        certificate_permissions = ["Get", "List", "Update", "Create", "Import", "Delete", "Purge", "Recover", "GetIssuers", "SetIssuers", "ListIssuers", "DeleteIssuers", "ManageIssuers", "Restore", "ManageContacts"]
+        secret_permissions      = ["Set", "Get", "List", "Delete", "Purge", "Recover"]
+        key_permissions         = []
+        storage_permissions     = []
+      }
+    }
+    diagnostic_profiles = {
+      central_logs_region1 = {
+        definition_key   = "azure_key_vault"
+        destination_type = "log_analytics"
+        destination_key  = "central_logs"
+      }
+    }
+    private_endpoints = {
+      vault = {
+        name               = "vaultsql11"
+        resource_group_key = "hive_metadata"
+        vnet_key           = "lz_vnet_region1"
+        subnet_key         = "private_endpoints"
+        private_service_connection = {
+          name                 = "vault"
+          is_manual_connection = false
+          subresource_names    = ["vault"]
+        }
+        private_dns = {
+          zone_group_name = "default"
+          keys            = ["privatelink.vaultcore.azure.net"]
+        }
+      }
+    }
+  }
   kv_shir = {
     name               = "kvshir22"
     resource_group_key = "runtimes"
@@ -161,6 +201,47 @@ keyvaults = {
       }
     }
   }
+  kv_databricks_monitoring = {
+    name               = "kvdbrickmon"
+    resource_group_key = "databricks_monitoring"
+    sku_name           = "standard"
+    #enable_rbac_authorization = true
+    soft_delete_enabled      = true
+    purge_protection_enabled = false
+    creation_policies = {
+      logged_in_user = {
+        #object_id               = "6405df78-1204-44e2-b0d2-6666c8d83f71"
+        certificate_permissions = ["Get", "List", "Update", "Create", "Import", "Delete", "Purge", "Recover", "GetIssuers", "SetIssuers", "ListIssuers", "DeleteIssuers", "ManageIssuers", "Restore", "ManageContacts"]
+        secret_permissions      = ["Set", "Get", "List", "Delete", "Purge", "Recover"]
+        key_permissions         = []
+        storage_permissions     = []
+      }
+    }
+    diagnostic_profiles = {
+      central_logs_region1 = {
+        definition_key   = "azure_key_vault"
+        destination_type = "log_analytics"
+        destination_key  = "central_logs"
+      }
+    }
+    private_endpoints = {
+      vault = {
+        name               = "databricks-monitoring"
+        resource_group_key = "databricks_monitoring"
+        vnet_key           = "lz_vnet_region1"
+        subnet_key         = "private_endpoints"
+        private_service_connection = {
+          name                 = "vault"
+          is_manual_connection = false
+          subresource_names    = ["vault"]
+        }
+        private_dns = {
+          zone_group_name = "default"
+          keys            = ["privatelink.vaultcore.azure.net"]
+        }
+      }
+    }
+  }
 }
 
 managed_identities = {
@@ -183,7 +264,6 @@ role_mapping = {
     }
   }
 }
-
 
 dynamic_keyvault_secrets = {
   kv_shir = {
