@@ -1,3 +1,15 @@
+diagnostic_storage_accounts = {
+  # Stores boot diagnostic for region1
+  bootdiag1 = {
+    name                     = "bootdiag1"
+    resource_group_key       = "runtimes"
+    account_kind             = "StorageV2"
+    account_tier             = "Standard"
+    account_replication_type = "LRS"
+    access_tier              = "Hot"
+  }
+}
+
 diagnostics_destinations = {
   # Storage keys must reference the azure region name
   # For storage, reference "all_regions" and we will send the logs to the storage account
@@ -6,7 +18,7 @@ diagnostics_destinations = {
 
   log_analytics = {
     central_logs = {
-      log_analytics_resource_id = "/subscriptions/47f7e6d7-0e52-4394-92cb-5f106bbc647f/resourceGroups/tpff-rg-logging-and-management-etmw/providers/Microsoft.OperationalInsights/workspaces/tpff-log-logs-wrip"
+      log_analytics_resource_id = "/subscriptions/47f7e6d7-0e52-4394-92cb-5f106bbc647f/resourceGroups/vdaf-rg-logging-and-management-kxlj/providers/Microsoft.OperationalInsights/workspaces/vdaf-log-logs-pmpl"
     }
   }
 }
@@ -352,3 +364,4 @@ diagnostics_definition = {
     }
   }
 }
+

@@ -73,12 +73,12 @@ vnets = {
     resource_group_key = "network"
     vnet = {
       name          = "dmlz-networking"
-      address_space = ["10.50.8.0/21"]
+      address_space = ["10.62.8.0/21"]
     }
     subnets = {
       shared_databricks_pub = {
         name          = "databricks-pub-shared"
-        cidr          = ["10.50.8.0/25"]
+        cidr          = ["10.62.8.0/25"]
         should_create = true
         nsg_key       = "databricks_pub"
         delegation = {
@@ -93,7 +93,7 @@ vnets = {
       }
       shared_databricks_pri = {
         name          = "databricks-pri-shared"
-        cidr          = ["10.50.8.128/25"]
+        cidr          = ["10.62.8.128/25"]
         should_create = true
         nsg_key       = "databricks_pri"
         delegation = {
@@ -108,26 +108,26 @@ vnets = {
       }
       services = {
         name          = "general-services"
-        cidr          = ["10.50.9.0/24"]
+        cidr          = ["10.62.9.0/24"]
         should_create = true
         nsg_key       = "empty_nsg"
       }
       private_endpoints = {
         name                                           = "private-endpoints"
-        cidr                                           = ["10.50.10.0/24"]
+        cidr                                           = ["10.62.10.0/24"]
         enforce_private_link_endpoint_network_policies = true
         should_create                                  = true
         nsg_key                                        = "empty_nsg"
       }
       bastion = {
         name          = "AzureBastionSubnet"
-        cidr          = ["10.50.11.0/25"]
+        cidr          = ["10.62.11.0/25"]
         should_create = true
         nsg_key       = "azure_bastion_nsg"
       }
       gateway = {
         name          = "data-gateway"
-        cidr          = ["10.50.11.128/26"]
+        cidr          = ["10.62.11.128/26"]
         should_create = true
         nsg_key       = "empty_nsg"
         delegation = {
@@ -140,7 +140,7 @@ vnets = {
       }
       data_app001 = {
         name          = "example-data-product-001"
-        cidr          = ["10.50.11.192/26"]
+        cidr          = ["10.62.11.192/26"]
         should_create = true
         nsg_key       = "empty_nsg"
       }
@@ -158,7 +158,7 @@ vnets = {
 
 vnet_peerings_v1 = {
   lz_to_hub = {
-    name = "data_landing_zone_to_scus_connectivity_hub"
+    name = "dlz_to_scus_connectivity_hub"
     from = {
       vnet_key = "lz_vnet_region1"
     }
@@ -171,7 +171,7 @@ vnet_peerings_v1 = {
     use_remote_gateways          = false
   }
   hub_to_lz = {
-    name = "scus_connectivity_hub_to_data_landing_zone"
+    name = "scus_connectivity_hub_to_dlz"
     from = {
       id = "/subscriptions/893395a4-65a3-4525-99ea-2378c6e0dbed/resourceGroups/rg-network_connectivity_hub/providers/Microsoft.Network/virtualNetworks/vnet-connectivity_hub"
     }
@@ -184,12 +184,12 @@ vnet_peerings_v1 = {
     use_remote_gateways          = false
   }
   lz_to_dmlz = {
-    name = "data_landing_zone_to_data_management_zone"
+    name = "lz_to_dmlz"
     from = {
       vnet_key = "lz_vnet_region1"
     }
     to = {
-      id = "/subscriptions/47f7e6d7-0e52-4394-92cb-5f106bbc647f/resourceGroups/tpff-rg-networking-volh/providers/Microsoft.Network/virtualNetworks/tpff-vnet-dmlz-networking-eema"
+      id = "/subscriptions/47f7e6d7-0e52-4394-92cb-5f106bbc647f/resourceGroups/vdaf-rg-networking-oclq/providers/Microsoft.Network/virtualNetworks/vdaf-vnet-dmlz-networking-yjwi"
     }
     allow_virtual_network_access = true
     allow_forwarded_traffic      = true
@@ -197,9 +197,9 @@ vnet_peerings_v1 = {
     use_remote_gateways          = false
   }
   dmlz_to_lz = {
-    name = "data_management_zone_to_data_landing_zone"
+    name = "dmlz_to_dlz"
     from = {
-      id = "/subscriptions/47f7e6d7-0e52-4394-92cb-5f106bbc647f/resourceGroups/tpff-rg-networking-volh/providers/Microsoft.Network/virtualNetworks/tpff-vnet-dmlz-networking-eema"
+      id = "/subscriptions/47f7e6d7-0e52-4394-92cb-5f106bbc647f/resourceGroups/vdaf-rg-networking-oclq/providers/Microsoft.Network/virtualNetworks/vdaf-vnet-dmlz-networking-yjwi"
     }
     to = {
       vnet_key = "lz_vnet_region1"
@@ -208,6 +208,65 @@ vnet_peerings_v1 = {
     allow_forwarded_traffic      = true
     allow_gateway_transit        = false
     use_remote_gateways          = false
+  }
+}
+
+
+public_ip_addresses = {
+  lb_pip1 = {
+    name               = "lb_pip1"
+    resource_group_key = "runtimes"
+    sku                = "Basic"
+    # Note: For UltraPerformance ExpressRoute Virtual Network gateway, the associated Public IP needs to be sku "Basic" not "Standard"
+    allocation_method = "Dynamic"
+    # allocation method needs to be Dynamic
+    ip_version              = "IPv4"
+    idle_timeout_in_minutes = "4"
+  }
+}
+
+
+# Application security groups
+application_security_groups = {
+  app_sg1 = {
+    resource_group_key = "runtimes"
+    name               = "app_sg1"
+
+  }
+}
+
+load_balancers = {
+  lb-vmss = {
+    name                      = "lb-vmss"
+    sku                       = "Basic"
+    resource_group_key        = "runtimes"
+    backend_address_pool_name = "vmss1"
+    frontend_ip_configurations = {
+      config1 = {
+        name                  = "config1"
+        public_ip_address_key = "lb_pip1"
+      }
+    }
+    probes = {
+      probe1 = {
+        resource_group_key = "runtimes"
+        load_balancer_key  = "lb-vmss"
+        probe_name         = "rdp"
+        port               = "3389"
+      }
+    }
+    lb_rules = {
+      rule1 = {
+        resource_group_key             = "runtimes"
+        load_balancer_key              = "lb-vmss"
+        lb_rule_name                   = "rule1"
+        protocol                       = "Tcp"
+        probe_id_key                   = "probe1"
+        frontend_port                  = "3389"
+        backend_port                   = "3389"
+        frontend_ip_configuration_name = "config1" #name must match the configuration that's defined in the load_balancers block.
+      }
+    }
   }
 }
 
