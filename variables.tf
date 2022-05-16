@@ -123,6 +123,10 @@ variable "data_factory_integration_runtime_self_hosted" {
   default = {}
 }
 
+variable "data_factory_integration_runtime_shared_self_hosted" {
+  default = {}
+}
+
 variable "keyvault_access_policies" {
   default = {}
 }
@@ -188,5 +192,13 @@ variable "synapse_privatelink_hubs" {
 }
 
 variable "happy_times" {
+  default = {}
+}
+
+variable "mssql_servers" {
+  default = {}
+}
+
+variable "mssql_databases" {
   default = {}
 }

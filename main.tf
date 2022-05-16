@@ -45,27 +45,30 @@ module "esa-dlz" {
     vnet_peerings_v1                  = var.vnet_peerings_v1
     network_security_group_definition = var.network_security_group_definition
     private_dns_vnet_links            = local.private_dns_zones
-    #application_security_groups       = var.application_security_groups
-    #public_ip_addresses               = var.public_ip_addresses
-    #load_balancers                    = var.load_balancers
+    application_security_groups       = var.application_security_groups
+    public_ip_addresses               = var.public_ip_addresses
+    load_balancers                    = var.load_balancers
     #synapse_privatelink_hubs          = var.synapse_privatelink_hubs
   }
 
   compute = {
-    #virtual_machine_scale_sets                            = var.virtual_machine_scale_sets
-    #vmss_extensions_custom_script_adf_integration_runtime = var.vmss_extensions_custom_script_adf_integration_runtime
+    virtual_machine_scale_sets                            = var.virtual_machine_scale_sets
+    vmss_extensions_custom_script_adf_integration_runtime = var.vmss_extensions_custom_script_adf_integration_runtime
     #azure_container_registries                            = var.azure_container_registries
     #bastion_hosts                                         = var.bastion_hosts
   }
 
   data_factory = {
-    #data_factory                                 = var.data_factory
-    #data_factory_integration_runtime_self_hosted = var.data_factory_integration_runtime_self_hosted
+    data_factory                                        = var.data_factory
+    data_factory_integration_runtime_self_hosted        = var.data_factory_integration_runtime_self_hosted
+    data_factory_integration_runtime_shared_self_hosted = var.data_factory_integration_runtime_shared_self_hosted
   }
 
   database = {
     databricks_workspaces = var.databricks_workspaces
     synapse_workspaces    = var.synapse_workspaces
+    mssql_servers         = var.mssql_servers
+    mssql_databases       = var.mssql_databases
   }
 
   purview = {
@@ -85,5 +88,9 @@ module "esa-dlz" {
 
   shared_services = {
     #shared_image_galleries = var.shared_image_galleries
+  }
+
+  security = {
+    dynamic_keyvault_secrets = var.dynamic_keyvault_secrets
   }
 }

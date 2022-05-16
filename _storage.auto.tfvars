@@ -60,7 +60,7 @@ storage_accounts = {
   }
   enriched_curated = {
     name                     = "enrichedcurated"
-    resource_group_key       = "synapse_shared"
+    resource_group_key       = "storage"
     account_kind             = "StorageV2"
     account_tier             = "Standard"
     account_replication_type = "LRS"
@@ -119,7 +119,7 @@ storage_accounts = {
   }
   raw = {
     name                     = "raw"
-    resource_group_key       = "synapse_shared"
+    resource_group_key       = "storage"
     account_kind             = "StorageV2"
     account_tier             = "Standard"
     account_replication_type = "LRS"
@@ -174,6 +174,44 @@ storage_accounts = {
           keys            = ["privatelink.dfs.core.windows.net"]
         }
       }
+    }
+  }
+  incoming_external = {
+    name                     = "incoming-external"
+    resource_group_key       = "external_data"
+    account_kind             = "StorageV2"
+    account_tier             = "Standard"
+    account_replication_type = "LRS"
+    access_tier              = "Hot"
+    is_hns_enabled           = false
+
+    containers = {
+      landing = {
+        name = "incominglanding"
+      }
+    }
+    private_endpoints = {
+      # Require enforce_private_link_endpoint_network_policies set to true on the subnet
+      blob = {
+        name               = "inc-ext"
+        vnet_key           = "lz_vnet_region1"
+        subnet_key         = "private_endpoints"
+        resource_group_key = "external_data"
+        identity = {
+          type         = "SystemAssigned"
+          identity_ids = []
+        }
+        private_service_connection = {
+          name                 = "inc-ext"
+          is_manual_connection = false
+          subresource_names    = ["blob"]
+        }
+        private_dns = {
+          zone_group_name = "privatelink.blob.core.windows.net"
+          keys            = ["privatelink.blob.core.windows.net"]
+        }
+      }
+
     }
   }
 }
