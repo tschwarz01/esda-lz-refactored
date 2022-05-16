@@ -248,7 +248,7 @@ data_factory_integration_runtime_shared_self_hosted = {
 }
 
 mssql_servers = {
-  sql_rg1 = {
+  adf_sql = {
     name                          = "meta-ingestion"
     region                        = "region1"
     resource_group_key            = "metadata"
@@ -266,13 +266,39 @@ mssql_servers = {
       tenant_id      = "72f988bf-86f1-41af-91ab-2d7cd011db47"
     }
   }
+  hive_sql = {
+    name                          = "hive-meta"
+    region                        = "region1"
+    resource_group_key            = "hive_metadata"
+    administrator_login           = "sqladmin"
+    keyvault_key                  = "hive_sql_secrets"
+    public_network_access_enabled = false
+
+    identity = {
+      type = "SystemAssigned"
+    }
+
+    azuread_administrator = {
+      login_username = "thosch@microsoft.com"
+      object_id      = "6405df78-1204-44e2-b0d2-6666c8d83f71"
+      tenant_id      = "72f988bf-86f1-41af-91ab-2d7cd011db47"
+    }
+  }
 }
 
 mssql_databases = {
   mssql_db1 = {
-    name               = "metadb"
+    name               = "adfmeta"
     resource_group_key = "metadata"
-    mssql_server_key   = "sql_rg1"
+    mssql_server_key   = "adf_sql"
+    license_type       = "LicenseIncluded"
+    max_size_gb        = 4
+    sku_name           = "BC_Gen5_2"
+  }
+  mssql_db2 = {
+    name               = "hivemeta"
+    resource_group_key = "hive_metadata"
+    mssql_server_key   = "hive_sql"
     license_type       = "LicenseIncluded"
     max_size_gb        = 4
     sku_name           = "BC_Gen5_2"

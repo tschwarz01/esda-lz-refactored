@@ -1,3 +1,12 @@
+diagnostic_log_analytics = {
+  databricks_monitoring = {
+    region             = "region1"
+    name               = "databricks-monitoring"
+    resource_group_key = "databricks_monitoring"
+
+  }
+}
+
 diagnostic_storage_accounts = {
   # Stores boot diagnostic for region1
   bootdiag1 = {
@@ -14,7 +23,6 @@ diagnostics_destinations = {
   # Storage keys must reference the azure region name
   # For storage, reference "all_regions" and we will send the logs to the storage account
   # in the region of the deployment
-
 
   log_analytics = {
     central_logs = {
@@ -364,4 +372,5 @@ diagnostics_definition = {
     }
   }
 }
+
 
