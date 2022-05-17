@@ -1,6 +1,6 @@
 keyvaults = {
   synapse_secrets = {
-    name                     = "synapsesecrets22"
+    name                     = "synapsesecrets19"
     resource_group_key       = "synapse_shared"
     sku_name                 = "premium"
     soft_delete_enabled      = true
@@ -40,7 +40,7 @@ keyvaults = {
     }
   }
   sql_secrets = {
-    name                     = "sqlsecrets22"
+    name                     = "sqlsecrets19"
     resource_group_key       = "metadata"
     sku_name                 = "standard"
     soft_delete_enabled      = true
@@ -80,7 +80,7 @@ keyvaults = {
     }
   }
   hive_sql_secrets = {
-    name                     = "sqlsecrets32"
+    name                     = "sqlsecrets19"
     resource_group_key       = "hive_metadata"
     sku_name                 = "standard"
     soft_delete_enabled      = true
@@ -120,7 +120,7 @@ keyvaults = {
     }
   }
   kv_shir = {
-    name               = "kvshir22"
+    name               = "kvshir19"
     resource_group_key = "runtimes"
     sku_name           = "standard"
     #enable_rbac_authorization = true
@@ -161,7 +161,7 @@ keyvaults = {
     }
   }
   kv_ingestion = {
-    name               = "kvingestion22"
+    name               = "kvingestion19"
     resource_group_key = "metadata"
     sku_name           = "standard"
     #enable_rbac_authorization = true
@@ -202,7 +202,7 @@ keyvaults = {
     }
   }
   kv_databricks_monitoring = {
-    name               = "kvdbrickmon"
+    name               = "kvdbrickmon19"
     resource_group_key = "databricks_monitoring"
     sku_name           = "standard"
     #enable_rbac_authorization = true
@@ -251,6 +251,7 @@ managed_identities = {
   }
 }
 
+
 role_mapping = {
   built_in_role_mapping = {
     storage_accounts = {
@@ -265,6 +266,7 @@ role_mapping = {
   }
 }
 
+/*
 dynamic_keyvault_secrets = {
   kv_shir = {
     shirKey = {
@@ -276,3 +278,4 @@ dynamic_keyvault_secrets = {
     }
   }
 }
+*/

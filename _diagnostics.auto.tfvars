@@ -26,7 +26,7 @@ diagnostics_destinations = {
 
   log_analytics = {
     central_logs = {
-      log_analytics_resource_id = "/subscriptions/47f7e6d7-0e52-4394-92cb-5f106bbc647f/resourceGroups/vdaf-rg-logging-and-management-kxlj/providers/Microsoft.OperationalInsights/workspaces/vdaf-log-logs-pmpl"
+      log_analytics_resource_id = "/subscriptions/47f7e6d7-0e52-4394-92cb-5f106bbc647f/resourceGroups/tnaq-rg-logging-and-management-xipm/providers/Microsoft.OperationalInsights/workspaces/tnaq-log-logs-wiwv"
     }
   }
 }

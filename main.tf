@@ -48,14 +48,13 @@ module "esa-dlz" {
     application_security_groups       = var.application_security_groups
     public_ip_addresses               = var.public_ip_addresses
     load_balancers                    = var.load_balancers
-    #synapse_privatelink_hubs          = var.synapse_privatelink_hubs
+    synapse_privatelink_hubs          = var.synapse_privatelink_hubs
   }
 
   compute = {
     virtual_machine_scale_sets                            = var.virtual_machine_scale_sets
     vmss_extensions_custom_script_adf_integration_runtime = var.vmss_extensions_custom_script_adf_integration_runtime
-    #azure_container_registries                            = var.azure_container_registries
-    #bastion_hosts                                         = var.bastion_hosts
+    bastion_hosts                                         = var.bastion_hosts
   }
 
   data_factory = {
@@ -71,10 +70,6 @@ module "esa-dlz" {
     mssql_databases       = var.mssql_databases
   }
 
-  purview = {
-    #purview_accounts = var.purview_accounts
-  }
-
   remote_objects = {
     private_dns = local.private_dns_zones
   }
@@ -84,10 +79,6 @@ module "esa-dlz" {
     diagnostics_destinations    = var.diagnostics_destinations
     diagnostics_definition      = var.diagnostics_definition
     diagnostic_storage_accounts = var.diagnostic_storage_accounts
-  }
-
-  shared_services = {
-    #shared_image_galleries = var.shared_image_galleries
   }
 
   security = {
