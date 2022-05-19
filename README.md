@@ -15,7 +15,8 @@ From project root:
 ### Gaps
 - CICD (GHA Worflow / ADO Pipeline)
 - Azure Policy
-- Realistic IAM 
+- Realistic IAM implementation
 - Room for improvement re: monitor diagnostic settings
 - Meta db for Databricks is present; however, cluster(s) will not automatically leverage the db
-- **need to implement example "data product" using separate tf deployment"**
+- The ingestion framework data factory, which shares the VMSS used by the 'integration' data factory's self-hosted integration runtime, is not consistently deploying on the first execution.  It should perhaps be omitted from initial release of the template until a resolution is found. 
+- **Need to implement example "data product" using separate tf deployment"**

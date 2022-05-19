@@ -44,11 +44,12 @@ module "esa-dlz" {
     vnets                             = var.vnets
     vnet_peerings_v1                  = var.vnet_peerings_v1
     network_security_group_definition = var.network_security_group_definition
-    private_dns_vnet_links            = local.private_dns_zones
     application_security_groups       = var.application_security_groups
     public_ip_addresses               = var.public_ip_addresses
     load_balancers                    = var.load_balancers
     synapse_privatelink_hubs          = var.synapse_privatelink_hubs
+    private_dns_vnet_links            = local.private_dns_vnet_links
+    #private_dns                       = try(var.private_dns.zones, {})
   }
 
   compute = {
@@ -71,7 +72,7 @@ module "esa-dlz" {
   }
 
   remote_objects = {
-    private_dns = local.private_dns_zones
+    private_dns = local.remote_private_dns_zones
   }
 
   diagnostics = {

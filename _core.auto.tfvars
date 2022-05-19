@@ -158,7 +158,7 @@ vnets = {
 
 vnet_peerings_v1 = {
   lz_to_hub = {
-    name = "dlz_to_scus_connectivity_hub"
+    name = "dlz_to_region1_hub"
     from = {
       vnet_key = "lz_vnet_region1"
     }
@@ -171,7 +171,7 @@ vnet_peerings_v1 = {
     use_remote_gateways          = false
   }
   hub_to_lz = {
-    name = "region1_connectivity_hub_to_dlz"
+    name = "region1_hub_to_dlz"
     from = {
       id = "/subscriptions/893395a4-65a3-4525-99ea-2378c6e0dbed/resourceGroups/rg-network_connectivity_hub/providers/Microsoft.Network/virtualNetworks/vnet-connectivity_hub"
     }
@@ -183,8 +183,8 @@ vnet_peerings_v1 = {
     allow_gateway_transit        = false
     use_remote_gateways          = false
   }
-  lz_to_dmlz = {
-    name = "lz_to_dmlz"
+  lz_to_dmz = {
+    name = "lz_to_dmz"
     from = {
       vnet_key = "lz_vnet_region1"
     }
@@ -196,8 +196,8 @@ vnet_peerings_v1 = {
     allow_gateway_transit        = false
     use_remote_gateways          = false
   }
-  dmlz_to_lz = {
-    name = "dmlz_to_dlz"
+  dmz_to_lz = {
+    name = "dmz_to_dlz"
     from = {
       id = "/subscriptions/47f7e6d7-0e52-4394-92cb-5f106bbc647f/resourceGroups/qjam-rg-networking-xuvk/providers/Microsoft.Network/virtualNetworks/qjam-vnet-dmlz-networking-kqdi"
     }
