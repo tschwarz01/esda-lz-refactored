@@ -15,7 +15,7 @@ virtual_machine_scale_sets = {
         admin_username                  = "adminuser"
         disable_password_authentication = false
         upgrade_mode                    = "Automatic" # Automatic / Rolling / Manual
-        priority                        = "Spot"
+        priority                        = "Regular"
         #eviction_policy                 = "Deallocate"
         #custom_data                     = "scripts/installSHIRGateway.ps1"
 

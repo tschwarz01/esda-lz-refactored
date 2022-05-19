@@ -72,13 +72,13 @@ vnets = {
   lz_vnet_region1 = {
     resource_group_key = "network"
     vnet = {
-      name          = "dmlz-networking"
-      address_space = ["10.19.8.0/21"]
+      name          = "dlz-networking"
+      address_space = ["10.71.8.0/21"]
     }
     subnets = {
       shared_databricks_pub = {
         name          = "databricks-pub-shared"
-        cidr          = ["10.19.8.0/25"]
+        cidr          = ["10.71.8.0/25"]
         should_create = true
         nsg_key       = "databricks_pub"
         delegation = {
@@ -93,7 +93,7 @@ vnets = {
       }
       shared_databricks_pri = {
         name          = "databricks-pri-shared"
-        cidr          = ["10.19.8.128/25"]
+        cidr          = ["10.71.8.128/25"]
         should_create = true
         nsg_key       = "databricks_pri"
         delegation = {
@@ -108,26 +108,26 @@ vnets = {
       }
       services = {
         name          = "general-services"
-        cidr          = ["10.19.9.0/24"]
+        cidr          = ["10.71.9.0/24"]
         should_create = true
         nsg_key       = "empty_nsg"
       }
       private_endpoints = {
         name                                           = "private-endpoints"
-        cidr                                           = ["10.19.10.0/24"]
+        cidr                                           = ["10.71.10.0/24"]
         enforce_private_link_endpoint_network_policies = true
         should_create                                  = true
         nsg_key                                        = "empty_nsg"
       }
       bastion = {
         name          = "AzureBastionSubnet"
-        cidr          = ["10.19.11.0/25"]
+        cidr          = ["10.71.11.0/25"]
         should_create = true
         nsg_key       = "azure_bastion_nsg"
       }
       gateway = {
         name          = "data-gateway"
-        cidr          = ["10.19.11.128/26"]
+        cidr          = ["10.71.11.128/26"]
         should_create = true
         nsg_key       = "empty_nsg"
         delegation = {
@@ -140,7 +140,7 @@ vnets = {
       }
       data_app001 = {
         name          = "example-data-product-001"
-        cidr          = ["10.19.11.192/26"]
+        cidr          = ["10.71.11.192/26"]
         should_create = true
         nsg_key       = "empty_nsg"
       }
@@ -189,7 +189,7 @@ vnet_peerings_v1 = {
       vnet_key = "lz_vnet_region1"
     }
     to = {
-      id = "/subscriptions/47f7e6d7-0e52-4394-92cb-5f106bbc647f/resourceGroups/tnaq-rg-networking-wdko/providers/Microsoft.Network/virtualNetworks/tnaq-vnet-dmlz-networking-nsop"
+      id = "/subscriptions/47f7e6d7-0e52-4394-92cb-5f106bbc647f/resourceGroups/qjam-rg-networking-xuvk/providers/Microsoft.Network/virtualNetworks/qjam-vnet-dmlz-networking-kqdi"
     }
     allow_virtual_network_access = true
     allow_forwarded_traffic      = true
@@ -199,7 +199,7 @@ vnet_peerings_v1 = {
   dmlz_to_lz = {
     name = "dmlz_to_dlz"
     from = {
-      id = "/subscriptions/47f7e6d7-0e52-4394-92cb-5f106bbc647f/resourceGroups/tnaq-rg-networking-wdko/providers/Microsoft.Network/virtualNetworks/tnaq-vnet-dmlz-networking-nsop"
+      id = "/subscriptions/47f7e6d7-0e52-4394-92cb-5f106bbc647f/resourceGroups/qjam-rg-networking-xuvk/providers/Microsoft.Network/virtualNetworks/qjam-vnet-dmlz-networking-kqdi"
     }
     to = {
       vnet_key = "lz_vnet_region1"

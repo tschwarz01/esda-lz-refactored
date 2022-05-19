@@ -1,6 +1,6 @@
 keyvaults = {
   synapse_secrets = {
-    name                     = "synapsesecrets19"
+    name                     = "synapsesecrets71"
     resource_group_key       = "synapse_shared"
     sku_name                 = "premium"
     soft_delete_enabled      = true
@@ -40,7 +40,7 @@ keyvaults = {
     }
   }
   sql_secrets = {
-    name                     = "sqlsecrets19"
+    name                     = "sqlsecrets71"
     resource_group_key       = "metadata"
     sku_name                 = "standard"
     soft_delete_enabled      = true
@@ -80,7 +80,7 @@ keyvaults = {
     }
   }
   hive_sql_secrets = {
-    name                     = "sqlsecrets19"
+    name                     = "sqlsecrets71"
     resource_group_key       = "hive_metadata"
     sku_name                 = "standard"
     soft_delete_enabled      = true
@@ -120,7 +120,7 @@ keyvaults = {
     }
   }
   kv_shir = {
-    name               = "kvshir19"
+    name               = "kvshir71"
     resource_group_key = "runtimes"
     sku_name           = "standard"
     #enable_rbac_authorization = true
@@ -161,7 +161,7 @@ keyvaults = {
     }
   }
   kv_ingestion = {
-    name               = "kvingestion19"
+    name               = "kvingestion71"
     resource_group_key = "metadata"
     sku_name           = "standard"
     #enable_rbac_authorization = true
@@ -202,7 +202,7 @@ keyvaults = {
     }
   }
   kv_databricks_monitoring = {
-    name               = "kvdbrickmon19"
+    name               = "kvdbrickmon71"
     resource_group_key = "databricks_monitoring"
     sku_name           = "standard"
     #enable_rbac_authorization = true
