@@ -223,6 +223,7 @@ data_factory_integration_runtime_self_hosted = {
       key = "runtimes"
     }
     data_factory = {
+      #id = "resource id"
       key = "runtimes"
     }
   }
@@ -236,9 +237,10 @@ data_factory_integration_runtime_shared_self_hosted = {
       key = "metadata"
     }
     data_factory = {
+      #principal_id = ""
       key = "ingestion"
     }
-    existing_data_factory = { # Utilize existing Self-Hosted Integration Runtime compute resources (Virtual Machines) associated with a separate Data Factory instance
+    host_data_factory = { # Utilize existing Self-Hosted Integration Runtime compute resources (Virtual Machines) associated with a separate Data Factory instance
       #resource_id         = ""         # resource id for data factory containing the self-hosted-integration compute resources (VMs) which you want this new runtime to share
       #runtime_resource_id = ""         # resource id for the self-hosted integration runtime associated with the compute resources which you want this new runtime to share
       key         = "runtimes" # key for data factory containing the self-hosted-integration compute resources (VMs) which you want this new runtime to share

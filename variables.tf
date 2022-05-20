@@ -73,6 +73,10 @@ variable "network_security_group_definition" {
   default = {}
 }
 
+variable "network_watchers" {
+  default = {}
+}
+
 ## Diagnostics settings
 variable "diagnostics_definition" {
   default     = null
