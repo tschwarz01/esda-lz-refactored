@@ -73,12 +73,12 @@ vnets = {
     resource_group_key = "network"
     vnet = {
       name          = "dlz-networking"
-      address_space = ["10.71.8.0/21"]
+      address_space = ["10.69.8.0/21"]
     }
     subnets = {
       shared_databricks_pub = {
         name          = "databricks-pub-shared"
-        cidr          = ["10.71.8.0/25"]
+        cidr          = ["10.69.8.0/25"]
         should_create = true
         nsg_key       = "databricks_pub"
         delegation = {
@@ -93,7 +93,7 @@ vnets = {
       }
       shared_databricks_pri = {
         name          = "databricks-pri-shared"
-        cidr          = ["10.71.8.128/25"]
+        cidr          = ["10.69.8.128/25"]
         should_create = true
         nsg_key       = "databricks_pri"
         delegation = {
@@ -108,28 +108,25 @@ vnets = {
       }
       services = {
         name          = "general-services"
-        cidr          = ["10.71.9.0/24"]
+        cidr          = ["10.69.9.0/24"]
         should_create = true
-        nsg_key       = "empty_nsg"
       }
       private_endpoints = {
         name                                           = "private-endpoints"
-        cidr                                           = ["10.71.10.0/24"]
+        cidr                                           = ["10.69.10.0/24"]
         enforce_private_link_endpoint_network_policies = true
         should_create                                  = true
-        nsg_key                                        = "empty_nsg"
       }
       bastion = {
         name          = "AzureBastionSubnet"
-        cidr          = ["10.71.11.0/25"]
+        cidr          = ["10.69.11.0/25"]
         should_create = true
         nsg_key       = "azure_bastion_nsg"
       }
       gateway = {
         name          = "data-gateway"
-        cidr          = ["10.71.11.128/26"]
+        cidr          = ["10.69.11.128/26"]
         should_create = true
-        nsg_key       = "empty_nsg"
         delegation = {
           name               = "power_platform_data_gateway"
           service_delegation = "Microsoft.PowerPlatform/vnetaccesslinks"
@@ -140,9 +137,8 @@ vnets = {
       }
       data_app001 = {
         name          = "example-data-product-001"
-        cidr          = ["10.71.11.192/26"]
+        cidr          = ["10.69.11.192/26"]
         should_create = true
-        nsg_key       = "empty_nsg"
       }
     }
     diagnostic_profiles = {
@@ -155,6 +151,13 @@ vnets = {
   }
 }
 
+network_watchers = {
+  network_watcher_1 = {
+    name               = "nwatcher_scus"
+    resource_group_key = "lz_vnet_region1"
+    region             = "region1"
+  }
+}
 
 vnet_peerings_v1 = {
   lz_to_hub = {
@@ -297,23 +300,101 @@ bastion_hosts = {
 }
 
 network_security_group_definition = {
+  empty_nsg = {
+    version            = 1
+    resource_group_key = "network"
+    name               = "empty_nsg"
+
+    /*
+    flow_logs = {
+      version = 2
+      enabled = true
+      storage_account = {
+        storage_account_destination = "all_regions"
+        retention = {
+          enabled = true
+          days    = 30
+        }
+      }
+      traffic_analytics = {
+        enabled                             = true
+        log_analytics_workspace_destination = "central_logs"
+        interval_in_minutes                 = "10"
+      }
+    }
+    */
+    diagnostic_profiles = {
+      nsg = {
+        definition_key   = "network_security_group"
+        destination_type = "storage"
+        destination_key  = "all_regions"
+      }
+      operations = {
+        name             = "operations"
+        definition_key   = "network_security_group"
+        destination_type = "log_analytics"
+        destination_key  = "central_logs"
+      }
+    }
+    nsg = []
+  }
 
   databricks_pub = {
     resource_group_key = "network"
     name               = "databricks-pub-nsg"
+    diagnostic_profiles = {
+      nsg = {
+        definition_key   = "network_security_group"
+        destination_type = "storage"
+        destination_key  = "all_regions"
+      }
+      operations = {
+        name             = "operations"
+        definition_key   = "network_security_group"
+        destination_type = "log_analytics"
+        destination_key  = "central_logs"
+      }
+    }
 
     nsg = []
   }
   databricks_pri = {
     resource_group_key = "network"
     name               = "databricks-pri-nsg"
+    diagnostic_profiles = {
+      nsg = {
+        definition_key   = "network_security_group"
+        destination_type = "storage"
+        destination_key  = "all_regions"
+      }
+      operations = {
+        name             = "operations"
+        definition_key   = "network_security_group"
+        destination_type = "log_analytics"
+        destination_key  = "central_logs"
+      }
+    }
 
     nsg = []
   }
 
   azure_bastion_nsg = {
+    version            = 1
     resource_group_key = "network"
-    name               = ""
+    name               = "azure_bastion_nsg"
+    diagnostic_profiles = {
+      nsg = {
+        definition_key   = "network_security_group"
+        destination_type = "storage"
+        destination_key  = "all_regions"
+      }
+      operations = {
+        name             = "operations"
+        definition_key   = "network_security_group"
+        destination_type = "log_analytics"
+        destination_key  = "central_logs"
+      }
+    }
     nsg = [
       {
         name                       = "AllowWebExperienceInBound",

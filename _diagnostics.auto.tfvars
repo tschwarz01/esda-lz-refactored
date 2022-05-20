@@ -3,7 +3,6 @@ diagnostic_log_analytics = {
     region             = "region1"
     name               = "databricks-monitoring"
     resource_group_key = "databricks_monitoring"
-
   }
 }
 
@@ -26,7 +25,20 @@ diagnostics_destinations = {
 
   log_analytics = {
     central_logs = {
+      workspace_id              = "a95b50c0-6010-4f27-984d-ab2aa9bfd7e5"
       log_analytics_resource_id = "/subscriptions/47f7e6d7-0e52-4394-92cb-5f106bbc647f/resourceGroups/qjam-rg-logging-and-management-kvxm/providers/Microsoft.OperationalInsights/workspaces/qjam-log-logs-vpbh"
+    }
+  }
+
+  # use existing storage account
+  storage = {
+    all_regions = {
+      southcentralus = {
+        storage_account_resource_id = "/subscriptions/47f7e6d7-0e52-4394-92cb-5f106bbc647f/resourceGroups/qjam-rg-logging-and-management-kvxm/providers/Microsoft.Storage/storageAccounts/qjamstdiaglogsre1vpwb"
+      }
+      centralus = {
+        storage_account_resource_id = "/subscriptions/47f7e6d7-0e52-4394-92cb-5f106bbc647f/resourceGroups/qjam-rg-logging-and-management-kvxm/providers/Microsoft.Storage/storageAccounts/qjamstdiaglogsre2lbje"
+      }
     }
   }
 }
