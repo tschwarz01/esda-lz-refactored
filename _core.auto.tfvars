@@ -11,7 +11,7 @@ global_settings = {
 
 resource_groups = {
   mgmt = {
-    name          = "mgmt"
+    name          = "logging-and-management"
     location      = "region1"
     should_create = true
   }
