@@ -279,6 +279,12 @@ load_balancers = {
   }
 }
 
+tags = {
+  Owner   = "Cloud Scale Analytics Scenario"
+  Project = "Cloud Scale Analytics Scneario"
+  Toolkit = "Terraform"
+}
+
 bastion_hosts = {
   bastion_hub = {
     name               = "lz_bastion-001"
